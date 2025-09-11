@@ -13,6 +13,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.organizobra_mobile.R;
 import com.organizobra_mobile.databinding.FragmentProjectsBinding;
@@ -24,11 +26,12 @@ public class ProjectsFragment extends Fragment {
 
     private List<ObraCard> obraList = new ArrayList<>();
 
+    private ImageButton addNewProject;
+
     private FragmentProjectsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-
 
 
         ProjectsViewModel homeViewModel =
@@ -36,6 +39,13 @@ public class ProjectsFragment extends Fragment {
 
         binding = FragmentProjectsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
+
+
+
+        binding.addNewProject.setOnClickListener(v -> {
+            NavController nav = Navigation.findNavController(requireView());
+            nav.navigate(R.id.nav_new_project);
+        });
 
 
         return root;

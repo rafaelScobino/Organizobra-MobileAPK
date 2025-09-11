@@ -28,5 +28,11 @@
         android:name="com.organizobra_mobile.ui.report.ReportFragment"
         android:label="@string/menu_report"
         tools:layout="@layout/fragment_report" />
+    <fragment
+        android:id="@+id/nav_new_project"
+        android:name="com.organizobra_mobile.ui.new_project.NewProjectFragment"
+        android:label="Nova Obra"
+        tools:layout="@layout/fragment_new_project"
+        />
 
 </navigation>
