@@ -8,8 +8,8 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="250dp"
-        tools:layout_editor_absoluteY="718dp">
+        tools:layout_editor_absoluteX="-365dp"
+        tools:layout_editor_absoluteY="-450dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -91,7 +91,7 @@
                     android:id="@+id/periodoObraInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="hint" />
+                    android:hint="Data Inicio" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Space
