@@ -9,12 +9,17 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
+import android.widget.ImageButton
+import android.widget.RadioButton
+import android.widget.Toast
 import androidx.core.util.Pair
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.organizobra_mobile.DB.AppState
+import com.organizobra_mobile.DB.Employee
 import com.organizobra_mobile.R
 import com.organizobra_mobile.databinding.FragmentIncludeBinding
 import java.text.SimpleDateFormat
@@ -48,6 +53,7 @@ class IncludeFragment : Fragment() {
         // Select de obras, MOCKADO
         setObraSelect(root)
 
+        setupSaveButton(root)
 
         return root
     }
@@ -55,6 +61,58 @@ class IncludeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         binding = null
+    }
+
+    private fun setupSaveButton(root: View) {
+        val btnSave = root.findViewById<ImageButton>(R.id.imageButton3)
+
+        btnSave.setOnClickListener {
+
+            val name = root.findViewById<TextInputEditText>(R.id.nameInput)?.text.toString()
+            val job = root.findViewById<TextInputEditText>(R.id.funcaoInput)?.text.toString()
+
+            val costType =
+                if (root.findViewById<RadioButton>(R.id.radioButtonDiaria).isChecked)
+                    "Diaria"
+                else
+                    "Verba"
+
+            val cleanValue = valorDiariaInput?.text.toString()
+                .replace("[^\\d]".toRegex(), "")
+            val costValue = if (cleanValue.isNotEmpty()) cleanValue.toDouble() / 100 else 0.0
+
+            val payType = root.findViewById<TextInputEditText>(R.id.meioPagamentoInput)?.text.toString()
+            val payDoc = root.findViewById<TextInputEditText>(R.id.contaPixInput)?.text.toString()
+            val projCode = root.findViewById<AutoCompleteTextView>(R.id.obraSelector)?.text.toString()
+
+            println(projCode)
+            if(AppState.projectMap[projCode]?.employeesList == null) {
+                println("Não achou")
+            }
+            AppState.projectMap[projCode]!!.addEmployee(
+                name = name,
+                job = job,
+                costType = costType,
+                costValue = costValue,
+                payType = payType,
+                payDoc = payDoc,
+                projCode = projCode
+            )
+
+            limparCampos(root)
+
+            Toast.makeText(context, "Salvo com sucesso!", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun limparCampos(root: View) {
+        root.findViewById<TextInputEditText>(R.id.nameInput)?.setText("")
+        root.findViewById<TextInputEditText>(R.id.funcaoInput)?.setText("")
+        valorDiariaInput?.setText("")
+        root.findViewById<TextInputEditText>(R.id.meioPagamentoInput)?.setText("")
+        root.findViewById<TextInputEditText>(R.id.contaPixInput)?.setText("")
+        dateRangeInput?.setText("")
+        autoCompleteTextView?.setText("")
     }
 
     private fun setCurrencyInput(root: View) {
@@ -116,8 +174,8 @@ class IncludeFragment : Fragment() {
     }
 
     private fun setObraSelect(root: View) {
-        autoCompleteTextView = root.findViewById(R.id.autoCompleteTextView)
-        val obras = arrayOf("Obra A", "Obra B", "Obra C")
+        autoCompleteTextView = root.findViewById(R.id.obraSelector)
+        val obras = AppState.projCodeList
         val adapter = ArrayAdapter(
             requireContext(),
             android.R.layout.simple_dropdown_item_1line,

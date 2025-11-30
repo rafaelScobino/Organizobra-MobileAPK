@@ -11,6 +11,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation.findNavController
+import com.organizobra_mobile.DB.AppState
+import com.organizobra_mobile.DB.Project
 import com.organizobra_mobile.R
 import com.organizobra_mobile.databinding.FragmentProjectsBinding
 
@@ -44,16 +46,28 @@ class ProjectsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        obraList.add(ObraCard("Card 1", "Subtitle 1"))
-        obraList.add(ObraCard("Card 2", "Subtitle 2"))
-        obraList.add(ObraCard("Card 3", "Subtitle 3"))
     }
 
+    fun mapObras(){
+        println(AppState.projCodeList.size)
+        println(AppState.projectMap.size)
+        for (project in AppState.projCodeList){
+            val proj = AppState.projectMap[project]
+            println(proj)
+
+            val cardMap = proj?.getCard()
+            println(cardMap)
+            if (cardMap != null) {
+                if(obraList.any{ e -> e.name == cardMap.name }) return
+                obraList.add(ObraCard(cardMap.name, cardMap.address,cardMap.subtitle))
+            }
+        }
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        this.mapObras()
 
         val cardContainer = view.findViewById<LinearLayout>(R.id.cardContainer)
 
@@ -62,12 +76,14 @@ class ProjectsFragment : Fragment() {
         for (card in obraList) {
             val cardView = inflater.inflate(R.layout.obra_card, cardContainer, false)
 
-            val titleView = cardView.findViewById<TextView>(R.id.obraName)
-            val subtitleView = cardView.findViewById<TextView>(R.id.obraAdress)
+            val titleView = cardView.findViewById<TextView>(R.id.funcName)
+            val AddressView = cardView.findViewById<TextView>(R.id.Address)
+            val subtitleView = cardView.findViewById<TextView>(R.id.Subtitle)
             val editButton = cardView.findViewById<ImageButton>(R.id.editButton)
 
             titleView.text = card.name
-            subtitleView.text = card.address
+            AddressView.text = card.address
+            subtitleView.text = card.subtitle
 
             editButton.setOnClickListener { v: View? ->
                 Toast.makeText(

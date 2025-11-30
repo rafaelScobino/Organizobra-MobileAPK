@@ -20,6 +20,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/nameInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nome" />
@@ -36,6 +37,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/funcaoInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Função" />
@@ -113,6 +115,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/meioPagamentoInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Meio Pagamento" />
@@ -129,6 +132,7 @@
                 android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/contaPixInput"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Conta/Pix" />
@@ -169,7 +173,7 @@
                 android:hint="Selecione a Obra">
 
                 <AutoCompleteTextView
-                    android:id="@+id/autoCompleteTextView"
+                    android:id="@+id/obraSelector"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:cursorVisible="false"

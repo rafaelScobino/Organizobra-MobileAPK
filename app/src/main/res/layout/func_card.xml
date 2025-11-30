@@ -29,22 +29,14 @@
                 >
 
                 <TextView
+                    android:id="@+id/FuncName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text=""
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/funcName"
-                    android:text="PlaceHolder Obras"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:ellipsize="end"
                     android:maxLines="2"
-                    android:ellipsize="end"/>
+                    android:text="funcName"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
             <LinearLayout
@@ -54,27 +46,38 @@
                 >
 
                 <TextView
+                    android:id="@+id/FuncJob"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Endereco: "
-                    android:id="@+id/Address"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="funcJob"
                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    />
+                    android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/Subtitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Subtitle"
-                    android:text="Av. Ayrton Senna, Nº 16003"
+                    android:ellipsize="end"
                     android:maxLines="2"
-                    android:ellipsize="end"/>
+                    android:text="Subtitle" />
+
+                <TextView
+                    android:id="@+id/ProjCode"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="projCode"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
             </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="95dp"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
             android:gravity="center"
             android:orientation="vertical"
@@ -82,12 +85,22 @@
 
             <ImageButton
                 android:id="@+id/editButton"
-                android:layout_width="50dp"
+                android:layout_width="48dp"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:contentDescription="Edit"
                 android:src="@drawable/ic_edit" />
+
+            <ImageButton
+                android:id="@+id/detailButton"
+                android:layout_width="48dp"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:contentDescription="Edit"
+                android:src="@android:drawable/ic_menu_view"
+                card_view:tint="#050505" />
 
         </LinearLayout>
 
